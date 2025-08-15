@@ -2,6 +2,12 @@
 
 This repository contains code for running and evaluating language models on the ToolComp benchmark, which tests a model's ability to use tools effectively.
 
+<div align="center">
+
+[📄 Paper](https://arxiv.org/abs/2501.01290) | [🤗 Dataset]() | [🏆 Chat Leaderboard](https://scale.com/leaderboard/tool_use_chat) | [🏆 Enterprise Leaderboard](https://scale.com/leaderboard/tool_use_enterprise)
+
+</div>
+
 ## Prerequisites
 
 Before running the evaluation, ensure you have:
