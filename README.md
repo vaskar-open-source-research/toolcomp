@@ -28,7 +28,7 @@ The main evaluation script is located in the `scripts` directory. It runs the mo
 To run the evaluation with default settings:
 
 ```bash
-cd /path/to/research_evals
+cd /path/to/toolcomp
 bash scripts/run_toolcomp.sh
 ```
 
@@ -67,7 +67,7 @@ The `run_toolcomp.sh` script sets up the following:
    - `AWS_PROFILE=ml-worker` - Sets the AWS profile to use for AWS services
 
 2. Configuration parameters:
-   - `MODEL_NAME` - The model to evaluate (default: anthropic/claude-3-7-sonnet-20250219)
+   - `MODEL_NAME` - The model to evaluate
    - `INFERENCE_STRATEGY` - The inference strategy to use (options: native or react)
 
 3. Runs the main evaluation:
