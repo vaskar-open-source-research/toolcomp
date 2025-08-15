@@ -1,0 +1,17 @@
+outputs/*
+full_toolcomp_data.jsonl
+full_toolcomp_data_audited.jsonl
+.env
+*__pycache__*
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+*.pyzwz
+*.pyzjw
+*.pyzjwz
+*.pyzwjw
+*.pyzwjwz
