@@ -1,14 +1,12 @@
 import argparse
 import json
 import os
-import sys
-import ast
 import numpy as np
 from openai import OpenAI
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
-from utils.keystore import auth_litellm
+from utils.keystore import auth_litellm, get_any_from_env
 import jsonlines
 import pandas as pd
 
@@ -154,8 +152,8 @@ def extract_student_answer(response):
 
 def grade(args):
 
-    api_key = auth_litellm()
-    client = OpenAI(api_key=api_key, base_url="https://litellm.ml-serving-internal.scale.com")
+    api_key, base_url = auth_litellm()
+    client = OpenAI(api_key=api_key, base_url=base_url)
     data = json.load(open(args.input_file, "r"))
     all_prompts = []
 

@@ -37,8 +37,14 @@ def main(args):
     auth_tools()
     auth_litellm()
 
-    policy_sampling_params = load_sampling_params(args, args.policy_generation_strategy, args.tool_use_strategy)
-    args.policy_sampling_params = policy_sampling_params
+    with open(args.config_file) as f:
+        config = json.load(f)
+    args.policy_sampling_params = config
+    print(f"config: {config}")
+
+    # save args + config to output dir
+    with open(os.path.join(args.output_dir, "config.json"), "w") as f:
+        json.dump({"args": args.__dict__, "config": config}, f)
 
     react_trees, input_data = load_data(args)
     pipeline = GenerationPipeline(args)
@@ -47,36 +53,11 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ReAct Generation Pipeline")
     parser.add_argument(
-        "--policy_model_str",
-        type=str,
-        default="fireworks-ai/firefunction-v1",
-        help="The model string to use for generation",
-    )
-    parser.add_argument(
         "--policy_generation_strategy",
         type=str,
         choices=[strategy.value for strategy in GENERATION_STRATEGY],
         default=GENERATION_STRATEGY.LITELLM.value,
         help="The generation strategy to use for the policy model",
-    )
-    parser.add_argument(
-        "--policy_max_tokens",
-        type=int,
-        default=10240,
-        help="The maximum number of tokens to generate for the policy",
-    )
-    parser.add_argument(
-        "--policy_temperature",
-        type=float,
-        default=0.5,
-        help="The temperature to use for the policy sampling",
-    )
-    parser.add_argument(
-        "--policy_stop",
-        type=str,
-        nargs="+",
-        default=[],
-        help="The stop strings to use for the policy sampling",
     )
     parser.add_argument(
         "--input_file",
@@ -102,7 +83,15 @@ if __name__ == "__main__":
         default=1,
         help="The number of times to retry the generation if it fails",
     )
-    
+
+    # policy model config
+    parser.add_argument(
+        "--config_file",
+        type=str,
+        help="The config file to use for generation",
+        required=True,
+    )
+
     # inference strategy
     parser.add_argument(
         "--tool_use_strategy",
@@ -111,7 +100,6 @@ if __name__ == "__main__":
         help="The tool use strategy to use for generation",
         choices=["native", "react"],
     )
-
 
     # hyperparameters for dataset loader
     parser.add_argument(

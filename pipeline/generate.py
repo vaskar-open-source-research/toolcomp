@@ -1,4 +1,3 @@
-import json
 import os
 
 from inference.react_inference import generate as react_generate
@@ -17,7 +16,7 @@ class GenerationPipeline:
     
     def prepare_inference_func(self, input_data, args):
             
-        policy_model = load_model(args.policy_model_str, args.policy_generation_strategy, args.policy_sampling_params)
+        policy_model = load_model(args.policy_sampling_params['model'], args.policy_generation_strategy, args.policy_sampling_params)
 
         inference_func = react_generate
         inference_args = {
@@ -31,7 +30,7 @@ class GenerationPipeline:
         return inference_func, inference_args
     
     def save_data(self, react_trees):
-        generations_file_path = os.path.join(self.args.output_dir, f"native_generations.json")
+        generations_file_path = os.path.join(self.args.output_dir, f"generations.json")
         os.makedirs(self.args.output_dir, exist_ok=True)
         save_json(react_trees, generations_file_path)
        
@@ -41,7 +40,7 @@ class GenerationPipeline:
                 indices = set()
                 for i, future in enumerate(running_futures):
                     if future.done():
-                        generation, index = future.result()
+                        generation, _ = future.result()
                         react_trees.append(generation)
                         indices.add(i)
                         pbar.update(1)

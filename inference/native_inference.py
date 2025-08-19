@@ -48,5 +48,3 @@ def generate(
     task_batch.update({'policy_answer': function_calling_generations, 'full_message_history': full_message_history})
 
     return task_batch, index
-
-    

@@ -43,6 +43,10 @@ def auth_litellm():
         "LITE_LLM_API_KEY",
     ])
 
+    api_base = get_any_from_env([
+        "LITE_LLM_API_BASE",
+    ])
+
     # Ensure the proxy key itself is exported if present
     set_if_unset("LITE_LLM_API_KEY", litellm_key)
 
@@ -51,7 +55,7 @@ def auth_litellm():
     set_if_unset("ANTHROPIC_API_KEY", get_any_from_env(["ANTHROPIC_API_KEY", "LITE_LLM_API_KEY"]))
     set_if_unset("GEMINI_API_KEY", get_any_from_env(["GEMINI_API_KEY"]))
 
-    return litellm_key
+    return litellm_key, api_base
 
 def auth_tools():
     """Populate tool-specific API keys from env/.env.

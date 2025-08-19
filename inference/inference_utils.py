@@ -17,7 +17,7 @@ def pre_process(task_batch: List[dict]):
     tree_list=[]
     queue = deque()
     for task in task_batch:
-        query = task["query"]
+        query = task["prompt"]
         tool = task["tools"]
         manager = ReActTreeManager(query, tool)
         if 'history' in task:
@@ -44,7 +44,7 @@ def pre_process(task_batch: List[dict]):
             tree_list.append(manager)
 
         for k,v in task.items():
-            if k not in ["query", "tools", "history", "action_plan", "ground_truth"]:
+            if k not in ["prompt", "tools", "history", "action_plan", "ground_truth"]:
                 manager.add_metadata(k,v)
 
         if "answer" in task:

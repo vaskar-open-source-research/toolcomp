@@ -1,4 +1,5 @@
 outputs/*
+ps_outputs/*
 full_toolcomp_data.jsonl
 full_toolcomp_data_audited.jsonl
 .env
@@ -15,3 +16,5 @@ full_toolcomp_data_audited.jsonl
 *.pyzjwz
 *.pyzwjw
 *.pyzwjwz
+*.jsonl
+*.json
