@@ -169,7 +169,7 @@ Notes:
 - API keys are loaded via the same mechanism described above (LiteLLM providers). Ensure relevant keys are set.
 - The script launches multiple models concurrently and waits for all to complete.
 
-## Process Supervision Evaluation
+## Citation
 
 If you found this work useful, please cite:
 
