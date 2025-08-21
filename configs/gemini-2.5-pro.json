@@ -1,0 +1,5 @@
+{
+    "model": "gemini/gemini-2.5-pro",
+    "reasoning": "high",
+    "custom_llm_provider": "openai"
+}

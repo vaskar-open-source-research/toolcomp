@@ -20,8 +20,7 @@ def load_data(args):
             input_data = json.load(f)
 
     input_data = [data for data in input_data if data['prompt']]
-
-    path=os.path.join(args.output_dir, f"native_generations.json")
+    path=os.path.join(args.output_dir, f"generations.json")
     
     react_trees = []
     if os.path.exists(path):

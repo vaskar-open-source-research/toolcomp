@@ -53,6 +53,7 @@ def auth_litellm():
     # Fill common providers if not already present
     set_if_unset("OPENAI_API_KEY", get_any_from_env(["OPENAI_API_KEY", "LITE_LLM_API_KEY"]))
     set_if_unset("ANTHROPIC_API_KEY", get_any_from_env(["ANTHROPIC_API_KEY", "LITE_LLM_API_KEY"]))
+    set_if_unset("LLAMA_API_KEY", get_any_from_env(["LLAMA_API_KEY", "LITE_LLM_API_KEY"]))
     set_if_unset("GEMINI_API_KEY", get_any_from_env(["GEMINI_API_KEY"]))
 
     return litellm_key, api_base

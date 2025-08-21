@@ -28,8 +28,9 @@ class LiteLLMWrapper(GenerationWrapper):
     def __init__(self, model, sampling_params):
         super().__init__(model, sampling_params)
 
-        api_key = auth_litellm()
-        litellm.api_base = "https://litellm.ml-serving-internal.scale.com"
+        api_key, api_base = auth_litellm()
+        litellm.api_key = api_key
+        litellm.api_base = api_base
     
     def _parse_functions(self, response_message):
         """Parse function/tool calls from response."""
@@ -50,16 +51,9 @@ class LiteLLMWrapper(GenerationWrapper):
             try:
                 litellm.drop_params = True
                 response = litellm.completion(
-                    model=self.model,
                     messages=messages,
                     tools=tools if tools else None,
-                    tool_choice=tool_choice if tools else None,
-                    max_tokens=self.sampling_params.get('max_tokens', 1024),
-                    temperature=self.sampling_params.get('temperature', 0.7),
-                    stop=self.sampling_params.get('stop', None),
-                    thinking={
-                        "effort" : "high"
-                    }
+                    **self.sampling_params
                 )
                 return response.choices[0].message
             except Exception as e:

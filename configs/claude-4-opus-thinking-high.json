@@ -1,0 +1,7 @@
+{
+    "model": "anthropic/claude-opus-4-20250514",
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 8192
+    }
+}

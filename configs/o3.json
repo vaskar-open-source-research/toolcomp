@@ -1,0 +1,4 @@
+{
+    "model": "openai/o3",
+    "reasoning_effort": "high"
+}

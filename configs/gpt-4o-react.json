@@ -1,0 +1,6 @@
+{
+    "model": "openai/gpt-4o",
+    "max_tokens": 8096,
+    "temperature": 0.0,
+    "stop": ["End Action\n", "\nEnd Action", "End Action"]
+}
